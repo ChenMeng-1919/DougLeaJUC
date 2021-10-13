@@ -1,0 +1,20 @@
+  
+# Maven #
+target/
+
+# IDEA #
+.idea/
+*.iml
+
+# Eclipse #
+.settings/
+.classpath
+.project
+/out
+/src/main/resources/application.properties
+/src/main/resources/generator.properties
+/src/main/resources/generatordev.properties
+/src/main/resources/application-devaly.properties
+/src/main/resources/application-devoracle.properties
+/src/main/resources/application-hive.properties
+/src/main/resources/application-prod.properties
