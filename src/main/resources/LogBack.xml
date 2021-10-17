@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+configuration是logback的根标签
+scan="true" 表示配置文件发生了改变会自动加载
+scanPeriod="60 seconds" 检测配置文件修改的时间间隔，默认的单位是毫秒，这里我们设置的表示每分钟检测
+debug="false" debug如果设置为true，表示我们会打印出来logback自身实时的运行信息，这里我们就不需要了，
+                   因为logback自身运行时非常稳定的，我们不需要对它做日志
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="logback.xsd"
+               scan="true"
+               scanPeriod="60 seconds"
+               debug="false"
+>
+    <!--日志输出位置-->
+    <property name="log.filepath" value="E:/Logback课程/Logback"></property>
+    <!--日志文件输出的格式
+    定义日志展示的格式
+    %d{yyyy-MM-dd HH:mm:ss.SSS} 定义一条日志的展示时间
+    [%thread] 表示执行日志的线程名称
+    %-5level 我们空出5个空格，然后显示我们的日志级别
+    %logger{100} 显示我们再哪个类（全限定类名）里面记录的日志，后面的{100}表示这个类名展示的最大长度是100
+    %msg 表示我们的日志信息
+    %n 表示换行
+    -->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} %msg%n"></property>
+    <!--定义控制台输出的媒介-->
+    <!--定义控制台输出，Class作为我们具体输出指定使用的类-->
+    <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <!--appender其实是负责统一调度日志的输出工作，而具体的日志的格式化工作和输出的工作会交给encoder-->
+        <encoder>
+            <!--定制日期输出的格式-->
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+    <!--
+    接下来我们还要定义不同级别的日志输出的媒介
+    对于日志框架来说，日志是有级别的，logback的日志级别有如下：
+    trace(追踪) < debug(调试) < info(记录信息) < warn(警告) < error(错误)
+    我们再记录日志的时候，一般需要使用到一个Logger类的对象，然后我们可以调用如下方法：
+    looger.trace("xxxx"),logger.debug("xxxx"),....等等
+    如果我们的记录的日志级别是info的话，info是大于trace和debug的，这个时候我们调用trace和debug发方法记录的日志是无法显示的。而调用warn和error是可以展示的。
+    一般情况下载开发项目的时候，我们只需要记录debug,info,error的日志就行了，而这个三个级别的日志我们需要放在不同的文件中
+    -->
+
+    <!--定义debug级别的日志输出，RollingFileAppender表示滚动日志，我们可以按天或者按月来生成不同的日志文件-->
+    <appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件路径-->
+        <file>${log.filepath}/debug.log</file>
+        <!--定义滚动策略,TimeBasedRollingPolicy是一个基于时间的滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--设置按每分钟的方式来生成文件，如果我们的文件名是用.gz结尾的，那么logback会自动帮我们压缩日志文件，如果我们不需要压缩，我们可以直接把.gz删除就行了-->
+            <fileNamePattern>${log.filepath}/debug-%d{yyyy-MM-dd}log.gz</fileNamePattern>
+            <!--设置文件最大保存的历史数据，这里就默认30份就行了-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--定义日志格式-->
+        <encoder>
+            <!--定义日志输出格式-->
+            <pattern>${log.patten}</pattern>
+        </encoder>
+        <!--因为我们的debugAppender只需要记录debug级别的日志，对于其他的日志我们不需要，所以我们要加一个过滤器，对于其他级别的日志，直接过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <!--如果是DEBUG日志，我们同意记录-->
+            <onMatch>ACCEPT</onMatch>
+            <!--如果不是DEBUG日志，我们直接忽略-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--定义info级别的日志的appender-->
+    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件路径-->
+        <file>${log.filepath}/info.log</file>
+        <!--定义滚动策略,TimeBasedRollingPolicy是一个基于时间的滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--设置按每分钟的方式来生成文件，如果我们的文件名是用.gz结尾的，那么logback会自动帮我们压缩日志文件，如果我们不需要压缩，我们可以直接把.gz删除就行了-->
+            <fileNamePattern>${log.filepath}/debug-%d{yyyy-MM-dd}log.gz</fileNamePattern>
+            <!--设置文件最大保存的历史数据，这里就默认30份就行了-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--定义日志格式-->
+        <encoder>
+            <!--定义日志输出格式-->
+            <pattern>${log.patten}</pattern>
+        </encoder>
+        <!--因为我们的infoAppender只需要记录info级别的日志，对于其他的日志我们不需要，所以我们要加一个过滤器，对于其他级别的日志，直接过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <!--如果是INFO日志，我们同意记录-->
+            <onMatch>ACCEPT</onMatch>
+            <!--如果不是INFO日志，我们直接忽略-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--定义error级别的日志的appender-->
+    <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--文件路径-->
+        <file>${log.filepath}/info.log</file>
+        <!--定义滚动策略,TimeBasedRollingPolicy是一个基于时间的滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--设置按每分钟的方式来生成文件，如果我们的文件名是用.gz结尾的，那么logback会自动帮我们压缩日志文件，如果我们不需要压缩，我们可以直接把.gz删除就行了-->
+            <fileNamePattern>${log.filepath}/debug-%d{yyyy-MM-dd}log.gz</fileNamePattern>
+            <!--设置文件最大保存的历史数据，这里就默认30份就行了-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!--定义日志格式-->
+        <encoder>
+            <!--定义日志输出格式-->
+            <pattern>${log.patten}</pattern>
+        </encoder>
+        <!--因为我们的errorAppender只需要记录error级别的日志，对于其他的日志我们不需要，所以我们要加一个过滤器，对于其他级别的日志，直接过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--如果是ERROR日志，我们同意记录-->
+            <onMatch>ACCEPT</onMatch>
+            <!--如果不是ERROR日志，我们直接忽略-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--
+        配置我们自己写的代码的日志记录器
+        name="com.vgxit.logback.kkdm" 表示对应包(包含子包)里面的类里面的代码产生的日志才会被下面的日志记录器记录，否则不会
+        level="DEBUG" 表示我们的日志记录的级别是DEBUG，如果我们不指定level的时候，我们这个日志记录器对应的级别自动继承根记录器
+        additivity="true" 表示我们自定义的记录器日志输出
+        -->
+    <!--<logger name="com.ccxit.LogBack" level="DEBUG" additivity="true">
+        <appender-ref ref="debugAppender"/>
+        <appender-ref ref="infoAppender"/>
+        <appender-ref ref="errorAppender"/>
+    </logger>-->
+    <!--根日志记录器，所有包下面的日志都会被记录-->
+    <root level="DEBUG">
+        <appender-ref ref="consoleAppender"/>
+    </root>
+</configuration>
