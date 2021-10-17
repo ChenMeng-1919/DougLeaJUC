@@ -1,0 +1,17 @@
+
+<configuration>
+    <property name="log.filepath" value="E:/Logback课程/Logback"></property>
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} %msg%n"></property>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--定义控制台输出格式-->
+        <encoder charset="utf-8">
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

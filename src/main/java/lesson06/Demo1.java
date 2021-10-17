@@ -17,7 +17,6 @@ public class Demo1 {
             @Override
             public void run() {
                 log.info("start");
-                System.out.println("1111");
                 boolean flag = true;
                 while (flag) {
                 }
