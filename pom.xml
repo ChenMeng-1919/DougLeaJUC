@@ -9,13 +9,37 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- é…ç½®mavenç¼–è¯‘çš„æ—¶å€™é‡‡ç”¨çš„ç¼–è¯‘å™¨ç‰ˆæœ¬ -->
+    <!-- ÅäÖÃmaven±àÒëµÄÊ±ºò²ÉÓÃµÄ±àÒëÆ÷°æ±¾ -->
     <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-    <!-- æŒ‡å®šæºä»£ç æ˜¯ä»€ä¹ˆç‰ˆæœ¬çš„ï¼Œå¦‚æžœæºç å’Œè¿™ä¸ªç‰ˆæœ¬ä¸ç¬¦å°†æŠ¥é”™ï¼Œmavenä¸­æ‰§è¡Œç¼–è¯‘çš„æ—¶å€™ä¼šç”¨åˆ°è¿™ä¸ªé…ç½®ï¼Œé»˜è®¤æ˜¯1.5ï¼Œè¿™ä¸ªç›¸å½“äºŽjavacå‘½ä»¤åŽé¢çš„-sourceå‚æ•° -->
+    <!-- Ö¸¶¨Ô´´úÂëÊÇÊ²Ã´°æ±¾µÄ£¬Èç¹ûÔ´ÂëºÍÕâ¸ö°æ±¾²»·û½«±¨´í£¬mavenÖÐÖ´ÐÐ±àÒëµÄÊ±ºò»áÓÃµ½Õâ¸öÅäÖÃ£¬Ä¬ÈÏÊÇ1.5£¬Õâ¸öÏàµ±ÓÚjavacÃüÁîºóÃæµÄ-source²ÎÊý -->
     <maven.compiler.source>1.8</maven.compiler.source>
-    <!-- è¯¥å‘½ä»¤ç”¨äºŽæŒ‡å®šç”Ÿæˆçš„classæ–‡ä»¶å°†ä¿è¯å’Œå“ªä¸ªç‰ˆæœ¬çš„è™šæ‹Ÿæœºè¿›è¡Œå…¼å®¹ï¼Œmavenä¸­æ‰§è¡Œç¼–è¯‘çš„æ—¶å€™ä¼šç”¨åˆ°è¿™ä¸ªé…ç½®ï¼Œé»˜è®¤æ˜¯1.5ï¼Œè¿™ä¸ªç›¸å½“äºŽjavacå‘½ä»¤åŽé¢çš„-targetå‚æ•° -->
+    <!-- ¸ÃÃüÁîÓÃÓÚÖ¸¶¨Éú³ÉµÄclassÎÄ¼þ½«±£Ö¤ºÍÄÄ¸ö°æ±¾µÄÐéÄâ»ú½øÐÐ¼æÈÝ£¬mavenÖÐÖ´ÐÐ±àÒëµÄÊ±ºò»áÓÃµ½Õâ¸öÅäÖÃ£¬Ä¬ÈÏÊÇ1.5£¬Õâ¸öÏàµ±ÓÚjavacÃüÁîºóÃæµÄ-target²ÎÊý -->
     <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
