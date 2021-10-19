@@ -33,10 +33,10 @@ public class Demo5 {
 
     public static class T extends Thread {
 
-        Demo5 demo6;
+        Demo5 demo5;
 
-        public T(Demo5 demo6) {
-            this.demo6 = demo6;
+        public T(Demo5 demo5) {
+            this.demo5 = demo5;
         }
 
         @Override
@@ -50,25 +50,29 @@ public class Demo5 {
         Thread t1 = new Thread(() -> {
             d1.m1();
         });
-
         t1.start();
+
         Thread t2 = new Thread(() -> {
             d1.m2();
         });
         t2.start();
+
         Thread t3 = new Thread(() -> {
             d1.m2();
         });
         t3.start();
+
         Demo5 d2 = new Demo5();
         Thread t4 = new Thread(() -> {
             d2.m2();
         });
         t4.start();
+
         Thread t5 = new Thread(() -> {
             Demo5.m4();
         });
         t5.start();
+
         Thread t6 = new Thread(() -> {
             Demo5.m5();
         });
