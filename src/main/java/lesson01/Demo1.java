@@ -1,10 +1,13 @@
 package lesson01;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * @author: cm
  * @date: Created in 2021/10/13 21:57
  * @description:死锁
  */
+@Slf4j
 public class Demo1 {
     public static void main(String[] args) {
         Object obj1 = new Object();
@@ -38,14 +41,14 @@ public class Demo1 {
                     synchronized (obj1) {
                         Thread.sleep(100);
                         synchronized (obj2) {
-                            System.out.println(a + b);
+                            log.info("{}", a + b);
                         }
                     }
                 } else {
                     synchronized (obj2) {
                         Thread.sleep(100);
                         synchronized (obj1) {
-                            System.out.println(a + b);
+                            log.info("{}", a + b);
                         }
                     }
                 }

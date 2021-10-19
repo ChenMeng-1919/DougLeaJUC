@@ -1,5 +1,7 @@
 package lesson10;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * @author: cm
  * @date: Created in 2021/10/18 21:01
@@ -10,6 +12,7 @@ package lesson10;
 
     修饰代码块，需要指定加锁对象(记做lockobj)，在进入同步代码块前需要先获取lockobj的锁
  */
+@Slf4j
 public class Demo1 {
     static int num = 0;
 
@@ -42,7 +45,7 @@ public class Demo1 {
         t1.join();
         t2.join();
         t3.join();
-        System.out.println(Demo1.num);
+        log.info("{}", Demo1.num);
         /**
          * 打印结果：
          * 25572
