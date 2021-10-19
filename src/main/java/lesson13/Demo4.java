@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /*
  * @author: cm
  * @date: Created in 2021/10/19 18:17
- * @description:
+ * @description:await(long time, TimeUnit unit)超时之后自动返回
  */
 @Slf4j
 public class Demo4 {

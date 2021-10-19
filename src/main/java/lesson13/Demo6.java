@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /*
  * @author: cm
  * @date: Created in 2021/10/19 18:25
- * @description:
+ * @description:long awaitNanos(long nanosTimeout)超时返回
  */
 @Slf4j
 public class Demo6 {

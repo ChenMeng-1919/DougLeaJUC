@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /*
  * @author: cm
  * @date: Created in 2021/10/19 18:13
- * @description:
+ * @description:Condition.await()过程中被打断
  */
 @Slf4j
 public class Demo3 {
@@ -25,8 +25,7 @@ public class Demo3 {
             lock.lock();
             try {
                 condition.await();
-            } catch (InterruptedException e
-            ) {
+            } catch (InterruptedException e) {
                 log.info("中断标志：" + this.isInterrupted());
                 e.printStackTrace();
             } finally {
