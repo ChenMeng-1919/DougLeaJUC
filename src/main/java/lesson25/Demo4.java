@@ -1,5 +1,7 @@
 package lesson25;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Calendar;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @date: Created in 2021/11/9 18:37
  * @description:
  */
+@Slf4j
 public class Demo4 {
 
     //推送信息封装
@@ -64,7 +67,7 @@ public class Demo4 {
                     msg = pushQueue.take();
                     //此处可以做真实推送
                     long endTime = System.currentTimeMillis();
-                    System.out.println(String.format("定时发送时间：%s,实际发送时间：%s,发送消息:%s", msg.sendTimeMs, endTime, msg));
+                    log.info(String.format("定时发送时间：%s,实际发送时间：%s,发送消息:%s", msg.sendTimeMs, endTime, msg));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
